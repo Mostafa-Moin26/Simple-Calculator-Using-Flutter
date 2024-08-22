@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MyButtons extends StatelessWidget {
-  const MyButtons({super.key});
+  final Color buttonColor;
+  final Color textColor;
+  final String buttonText;
+
+  const MyButtons({
+    super.key,
+    required this.buttonColor,
+    required this.textColor,
+    required this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +19,13 @@ class MyButtons extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          color: Colors.deepPurple,
+          color: buttonColor,
           child: Center(
             child: Text(
-              'B',
+              buttonText,
               style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
+                fontSize: 20,
+                color: textColor,
               ),
             ),
           ),

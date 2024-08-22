@@ -70,14 +70,51 @@ class _HomePageState extends State<HomePage> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4),
                   itemBuilder: (BuildContext context, int index) {
-                    return MyButtons(
-                      buttonColor: Colors.deepPurple,
-                      textColor: Colors.white,
-                      buttonText: buttons[index],
-                    );
+                    if (index == 0) {
+                      return MyButtons(
+                        buttonColor: Colors.green,
+                        textColor: Colors.white,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    // Delete button
+                    else if (index == 1) {
+                      return MyButtons(
+                        buttonColor: Colors.red,
+                        textColor: Colors.white,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    // Equal button
+                    else if (index == buttons.length - 1) {
+                      return MyButtons(
+                        buttonColor: Colors.red,
+                        textColor: Colors.white,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    // Rest of the buttons
+                    else {
+                      return MyButtons(
+                        buttonColor: isOperator(buttons[index])
+                            ? Colors.deepPurple
+                            : Colors.deepPurple[50] ?? Colors.deepPurple,
+                        textColor: isOperator(buttons[index])
+                            ? Colors.white
+                            : Colors.deepPurple,
+                        buttonText: buttons[index],
+                      );
+                    }
                   }))
         ],
       ),
     );
+  }
+
+  bool isOperator(String s) {
+    if (s == '%' || s == '/' || s == 'x' || s == '-' || s == '+') {
+      return true;
+    }
+    return false;
   }
 }

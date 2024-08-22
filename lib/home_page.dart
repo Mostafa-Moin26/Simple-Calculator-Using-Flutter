@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var userQuestion = '';
+  var userAnswer = '';
   final List<String> buttons = [
     'C',
     'DEL',
@@ -48,16 +50,16 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    '55+55-10',
-                    style: TextStyle(fontSize: 20),
+                    userQuestion,
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.bottomRight,
                   child: Text(
-                    '100',
-                    style: TextStyle(fontSize: 20),
+                    userAnswer,
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
               ],
@@ -75,6 +77,11 @@ class _HomePageState extends State<HomePage> {
                         buttonColor: Colors.green,
                         textColor: Colors.white,
                         buttonText: buttons[index],
+                        buttonPressed: () {
+                          setState(() {
+                            userQuestion = '';
+                          });
+                        },
                       );
                     }
                     // Delete button
@@ -83,6 +90,14 @@ class _HomePageState extends State<HomePage> {
                         buttonColor: Colors.red,
                         textColor: Colors.white,
                         buttonText: buttons[index],
+                        buttonPressed: () {
+                          setState(() {
+                            userQuestion = userQuestion.isEmpty
+                                ? ''
+                                : userQuestion.substring(
+                                    0, userQuestion.length - 1);
+                          });
+                        },
                       );
                     }
                     // Equal button
@@ -91,6 +106,7 @@ class _HomePageState extends State<HomePage> {
                         buttonColor: Colors.red,
                         textColor: Colors.white,
                         buttonText: buttons[index],
+                        buttonPressed: () {},
                       );
                     }
                     // Rest of the buttons
@@ -103,6 +119,11 @@ class _HomePageState extends State<HomePage> {
                             ? Colors.white
                             : Colors.deepPurple,
                         buttonText: buttons[index],
+                        buttonPressed: () {
+                          setState(() {
+                            userQuestion += buttons[index];
+                          });
+                        },
                       );
                     }
                   }))

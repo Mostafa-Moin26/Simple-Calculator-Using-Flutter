@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_calculator/buttons.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -106,7 +107,11 @@ class _HomePageState extends State<HomePage> {
                         buttonColor: Colors.red,
                         textColor: Colors.white,
                         buttonText: buttons[index],
-                        buttonPressed: () {},
+                        buttonPressed: () {
+                          setState(() {
+                            equalPressed();
+                          });
+                        },
                       );
                     }
                     // Rest of the buttons
@@ -137,5 +142,18 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
     return false;
+  }
+
+  void equalPressed() {
+    String finalQuesion = userQuestion;
+
+    finalQuesion = finalQuesion.replaceAll('x', '*');
+
+    Parser p = Parser();
+    Expression exp = p.parse(finalQuesion);
+
+    ContextModel cm = ContextModel();
+    double eval = exp.evaluate(EvaluationType.REAL, cm);
+    userAnswer = eval.toString();
   }
 }
